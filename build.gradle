@@ -24,6 +24,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperty 'selenide.headless=true', System.getProperty('selenide.headless')
-    systemProperty 'selenide.browser=firefox', System.getProperty('selenide.browser')
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless', "true")
+    systemProperty 'selenide.browser', System.getProperty('selenide.browser', "firefox")
 }
