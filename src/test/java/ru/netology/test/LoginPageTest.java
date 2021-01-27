@@ -23,14 +23,14 @@ public class LoginPageTest {
 
     @Test
     void shouldSuccessLogin() {
-        userRegistation("active");
+        userRegistration("active");
         submitButton.click();
         $(byText("Личный кабинет")).shouldBe(visible);
     }
 
     @Test
     void shouldNotLoginWrongName() {
-        userRegistation("active");
+        userRegistration("active");
         $("[data-test-id='login'] .input__control").setValue(getAnotherLogin());
         submitButton.click();
         errorMessage.shouldBe(visible).shouldHave(text("Ошибка! Неверно указан логин или пароль"));
@@ -38,7 +38,7 @@ public class LoginPageTest {
 
     @Test
     void shouldNotLoginWrongPass() {
-        userRegistation("active");
+        userRegistration("active");
         $("[data-test-id='password'] .input__control").setValue(getAnotherPassword());
         submitButton.click();
         errorMessage.shouldBe(visible).shouldHave(text("Ошибка! Неверно указан логин или пароль"));
@@ -46,7 +46,7 @@ public class LoginPageTest {
 
     @Test
     void shouldNotLoginBlockedUser() {
-        userRegistation("blocked");
+        userRegistration("blocked");
         submitButton.click();
         errorMessage.shouldBe(visible).shouldHave(text("Ошибка! Пользователь заблокирован"));
     }

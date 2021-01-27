@@ -8,15 +8,15 @@ import lombok.Value;
 import static io.restassured.RestAssured.given;
 
 public class DataHelper {
-    private DataHelper(){}
+    private DataHelper() {
+    }
 
     public static class User {
         private static final Faker faker = new Faker();
         private static final String login = faker.name().username();
         private static final String password = faker.internet().password();
-        private static TestUser tUser = new TestUser(login, password, "active");
 
-        public static void userRegistation(String status){
+        public static void userRegistration(String status) {
             given()
                     .baseUri("http://localhost:9999")
                     .contentType(ContentType.JSON)
@@ -26,40 +26,6 @@ public class DataHelper {
                     .then()
                     .statusCode(200);
         }
-
-        /*public static void setStatus(String status){
-            tUser.status = status;
-            given()
-                    .baseUri("http://localhost:9999")
-                    .contentType(ContentType.JSON)
-                    .body(new Gson().toJson(tUser))
-                    .when()
-                    .post("/api/system/users")
-                    .then()
-                    .statusCode(200);
-        }*/
-
-        /*public static void activeUserRegistration(){
-            given()
-                    .baseUri("http://localhost:9999")
-                    .contentType(ContentType.JSON)
-                    .body(new Gson().toJson(new testUser(login, password, "active")))
-                    .when()
-                    .post("/api/system/users")
-                    .then()
-                    .statusCode(200);
-        }
-
-        public static void blockedUserRegistration(){
-            given()
-                    .baseUri("http://localhost:9999")
-                    .contentType(ContentType.JSON)
-                    .body(new Gson().toJson(new testUser(login, password, "blocked")))
-                    .when()
-                    .post("/api/system/users")
-                    .then()
-                    .statusCode(200);
-        }*/
 
         public static String getLogin() {
             return login;
@@ -84,15 +50,10 @@ public class DataHelper {
         String password;
         String status;
 
-        private TestUser(String login, String password, String status){
+        private TestUser(String login, String password, String status) {
             this.login = login;
             this.password = password;
             this.status = status;
         }
-
-        public void setStatus(String status){
-            this.status = status;
-        }
     }
-    
 }
