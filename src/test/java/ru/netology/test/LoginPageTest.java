@@ -16,6 +16,7 @@ public class LoginPageTest {
 
     @BeforeEach
     void setUp() {
+        userRegistration("active");
         open("http://localhost:9999/");
         $("[data-test-id='login'] .input__control").setValue(getLogin());
         $("[data-test-id='password'] .input__control").setValue(getPassword());
@@ -23,14 +24,12 @@ public class LoginPageTest {
 
     @Test
     void shouldSuccessLogin() {
-        userRegistration("active");
         submitButton.click();
         $(byText("Личный кабинет")).shouldBe(visible);
     }
 
     @Test
     void shouldNotLoginWrongName() {
-        userRegistration("active");
         $("[data-test-id='login'] .input__control").setValue(getAnotherLogin());
         submitButton.click();
         errorMessage.shouldBe(visible).shouldHave(text("Ошибка! Неверно указан логин или пароль"));
@@ -38,7 +37,6 @@ public class LoginPageTest {
 
     @Test
     void shouldNotLoginWrongPass() {
-        userRegistration("active");
         $("[data-test-id='password'] .input__control").setValue(getAnotherPassword());
         submitButton.click();
         errorMessage.shouldBe(visible).shouldHave(text("Ошибка! Неверно указан логин или пароль"));
